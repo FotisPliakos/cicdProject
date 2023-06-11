@@ -39,7 +39,7 @@ pipeline {
 
         stage('Checksyle Analysis:Code analysis tool'){
             steps {
-                sh 'mvn -s settings.xml checkstyle:checkstyle' //code analysis tool , and suggest for best practices 
+                sh 'mvn -s settings.xml checkstyle:checkstyle' //code analysis tool , suggests for best practices 
             }
         }
     
