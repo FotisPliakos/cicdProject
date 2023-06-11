@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Unit Test'){
             steps {
-                sh 'mvn -s settings.xml test' //shell command ,unittest ,will generate a report that we use later and upload on sonarqube
+                sh 'mvn -s settings.xml test' //shell command ,unittest ,will generate a report that we use later and upload on sonarqube server
             }
         }
 
