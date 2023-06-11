@@ -23,8 +23,10 @@ pipeline {
                 sh 'mvn -s settings.xml -DskipTests install' //we use -s settings.xml in order to use our nexus repo and not maven repo
             }
             post { //when the steps is completed what to do
-                echo 'Now Archiving.'
-                archiveArtifacts artifacts: '**/*.war'  //archiveArtifacts plugin : archive everyting that endds with .war
+                success {
+                    echo 'Now Archiving.'
+                    archiveArtifacts artifacts: '**/*.war'  //archiveArtifacts plugin : archive everyting that endds with .war
+                }
             }
         
         }
