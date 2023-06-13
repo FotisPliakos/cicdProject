@@ -45,15 +45,12 @@ pipeline {
             }
         }
 
+        
         stage('Sonar Analysis') {
             environment {
-                scannerHome = tool "${SONARSCANNER}"   //globar variable into local variable(scannerHome)
+            scannerHome = tool "${SONARSCANNER}" //globar variable into local variable(scannerHome)
             }
             
-            stage('Sonar Analysis') {
-            environment {
-                scannerHome = tool "${SONARSCANNER}"
-            }
             steps {
                withSonarQubeEnv("${SONARSERVER}") {
                    sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
