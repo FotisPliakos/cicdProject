@@ -74,6 +74,26 @@ pipeline {
                 }
             }
         }
+
+        stage("UploadArtifact"){
+            steps{
+                nexusArtifactUploader(                                      //jenkins plug in
+                  nexusVersion: 'nexus3',
+                  protocol: 'http',                                         
+                  nexusUrl: "${NEXUSIP}:${NEXUSPORT}",                      //nexus ip and port from enviroment variable
+                  groupId: 'QA',                                            //folder QA fron nexus repository
+                  version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",        // build id + build timestamp from jenkins plug in
+                  repository: "${RELEASE_REPO}",                            // the name i give to nexus repository
+                  credentialsId: "${NEXUS_LOGIN}",                          //nexus login credential i saved in jenkins
+                  artifacts: [
+                    [artifactId: 'flidoxapp',                   //prefix              
+                     classifier: '',
+                     file: 'target/vprofile-v2.war',
+                     type: 'war']
+                  ]
+                )
+            }
+        }
     }
     
 }
