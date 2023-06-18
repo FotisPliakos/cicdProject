@@ -98,6 +98,14 @@ pipeline {
                 )
             }
         }
+        post {                                                         
+        always{                                                         //always this will be executed 
+            echo 'Slack Notification.'   //print message
+            slackSend channel: '#jenkins', //slackSend is the plugin we install  + channel name
+                color: COLOR_MAP[currentBuild.currentResult],  // jenkins globar variables
+                message: "'*${currentBuild.currentResult}':* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}" //message name 
+            }
+        }
    
 
     }
