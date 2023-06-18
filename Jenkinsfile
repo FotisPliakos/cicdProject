@@ -1,3 +1,7 @@
+def COLOR_MAP = [
+    'SUCCESS': 'good',  // good in slack means green color
+    'FAILURE': 'danger', // danger=red color
+]
 pipeline {
     agent any
     tools {
@@ -86,7 +90,7 @@ pipeline {
                   repository: "${RELEASE_REPO}",                            // the name i give to nexus repository
                   credentialsId: "${NEXUS_LOGIN}",                          //nexus login credential i saved in jenkins
                   artifacts: [
-                    [artifactId: 'flidoxapp',                   //prefix              
+                    [artifactId: 'flidoxapp',                   //prefix   subfolder           
                      classifier: '',
                      file: 'target/vprofile-v2.war',
                      type: 'war']
@@ -94,6 +98,16 @@ pipeline {
                 )
             }
         }
+        post {                                                         
+            always{                                                         //always this will be executed 
+                echo 'Slack Notification.'   //print message
+                slackSend channel: '#jenkins', //slackSend is the plugin we install  + channel name
+                    color: COLOR_MAP[currentBuild.currentResult],  // jenkins globar variables
+                    message: "'*${currentBuild.currentResult}':* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}" //message name 
+            }
+        }
+
+
     }
     
 }
