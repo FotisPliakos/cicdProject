@@ -98,7 +98,7 @@ pipeline {
                 )
             }
         }
-        post {                                                         
+    post {                                                         
         always{                                                         //always this will be executed 
             echo 'Slack Notification.'   //print message
             slackSend channel: '#jenkins', //slackSend is the plugin we install  + channel name
