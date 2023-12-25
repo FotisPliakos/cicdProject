@@ -3,7 +3,7 @@ Architecture!
 ![image](https://github.com/FotisPliakos/cicdProject/assets/48320291/c1d79144-e0bd-47d3-9e1e-4d67518a699d)
 ![image](https://github.com/FotisPliakos/cicdProject/assets/48320291/9c32d8cc-1ee6-45d6-b163-af38ef9ab101)
 
-##### Prerequisites
+######### Prerequisites
 
 - JDK 1.8 or later
 - Maven 3 or later
