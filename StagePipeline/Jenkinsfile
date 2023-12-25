@@ -21,6 +21,9 @@ pipeline {
         NEXUS_LOGIN = 'nexuslogin'
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
+        registryCredential = 'ecr:us-east-1:awscreds' //awscreds is the name of creds in jenkins
+        appRegistry = '329905646086.dkr.ecr.us-east-1.amazonaws.com/fotiscontainerregistry' //ecr registry
+        vprofileRegistry = "https://329905646086.dkr.ecr.us-east-1.amazonaws.com"
     }
 
     stages {
@@ -98,6 +101,27 @@ pipeline {
                 )
             }
         }
+
+        stage('Build App Image'){
+            steps{
+                script {
+                    dockerImage = docker.build(appRegistry + ":$BUILD_NUMBER", "./Docker-files/app/multistage" )        //docker.build plugin we istanll in jenkins  + path of the docker file
+                }
+            }
+        }
+
+        stage('Upload Image to ECR'){
+            steps{
+                script{
+                    docker.withRegistry( vprofileRegistry, registryCredential) {
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push('latest')
+                    }
+                }
+            }
+        }
+
+
         }
     post {
         always {                            //always this will be executed 
