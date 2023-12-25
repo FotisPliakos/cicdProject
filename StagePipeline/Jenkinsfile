@@ -24,6 +24,8 @@ pipeline {
         registryCredential = 'ecr:us-east-1:awscreds' //awscreds is the name of creds in jenkins
         appRegistry = '329905646086.dkr.ecr.us-east-1.amazonaws.com/fotiscontainerregistry' //ecr registry
         vprofileRegistry = "https://329905646086.dkr.ecr.us-east-1.amazonaws.com"
+        cluster = "StagingCluster"
+        service = "stagingservice"
     }
 
     stages {
@@ -120,7 +122,15 @@ pipeline {
                 }
             }
         }
+        
+        stage('Deploy to ECS staging'){
+            steps {
+                withAWS(credentials: 'awscreds', region: 'us-east-1'){
+                    sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
+                }
 
+            }
+        }
 
         }
     post {
