@@ -1,8 +1,8 @@
 Architecture!
 
-![image][Architecture Of Continous Delivery PipeLine 2](https://github.com/FotisPliakos/cicdProject/assets/48320291/3c5b117b-f247-499f-b04e-9e9d7d83f8c8)
+![image](https://github.com/FotisPliakos/cicdProject/assets/48320291/3c5b117b-f247-499f-b04e-9e9d7d83f8c8)
 
-![image][Architecture Of Continous Delivery PipeLine](https://github.com/FotisPliakos/cicdProject/assets/48320291/2681e11c-ba56-42cb-9088-b7dd8ab399d1)
+![image](https://github.com/FotisPliakos/cicdProject/assets/48320291/2681e11c-ba56-42cb-9088-b7dd8ab399d1)
 
 
 ######### Prerequisites
